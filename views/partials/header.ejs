@@ -1,0 +1,19 @@
+<nav class="header-nav">
+    <a href="/" class="header-title">
+        <h3>Gourav Ebooks</h3>
+    </a>
+    <ul>
+        <% if(locals.signedIn == null){
+            signedIn= false;
+        }
+        %>
+        <% if(!signedIn) { %>
+        <li><a class="header-link" href="/user/login">Login</a></li>
+        <li><a class="header-link" href="/user/signup">Sign Up</a></li>
+        <% } else { %>
+        <li><a class="header-link" href="/user/logout">Logout</a></li>
+        <li><a class="header-link" href="/user/delete">Delete</a></li>
+        <% } %>
+
+    </ul>
+</nav>

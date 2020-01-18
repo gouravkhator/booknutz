@@ -1,0 +1,60 @@
+@import "./navbar.css";
+@import "./book.css";
+@import "./userAction.css";
+
+:root{
+    --color-base-hue: 200;
+    --color-danger-hue: calc(var(--color-base-hue) - 190);
+    --color-background-dark: hsl(var(--color-base-hue), 100%, 30%);
+    --color-background-light: hsl(var(--color-base-hue),100%,80%);
+    --color-text-dark: hsl(var(--color-base-hue),100%,5%);
+    --color-border: hsl(var(--color-base-hue),100%,60%);
+    --color-danger: hsl(var(--color-danger-hue),100%,40%);
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right,var(--color-background-dark) , var(--color-background-light));
+    max-width: 1200px;
+    margin: auto;
+    color: var(--color-text-dark);
+    font-size: 16px;
+}
+
+ul{
+    padding: 0px 2vw;
+}
+
+.payBtn{
+    width: 60%;
+    min-width: 200px;
+    height: 3rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: var(--color-danger);
+    color: white;
+    text-align: center;
+    padding: .4rem;
+    border-radius: .5rem;
+    border: 1px solid var(--color-border);
+}
+
+.error-msg{
+    color: var(--color-danger);
+    font-size: 1.4rem;
+}
+
+@media(max-width:1200px){
+    body{
+        padding: 2rem;
+    }
+}
+
+@media(max-width:500px){
+    body{
+        text-align: center;
+    }
+}

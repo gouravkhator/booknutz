@@ -1,0 +1,12 @@
+<div class="all-books-container">
+    <h2 class="book-title">Recently Added</h2>
+    <ul>
+        <% books.forEach(book => { %>
+        <li>
+            <img src="/image/<%= book.filename %>" class="img-fluid img-small" />
+            <a type="button" class="payBtn" href="/book/show/<%= book.filename %>">View Book</a>
+        </li>
+        <% }) %>
+    </ul>
+
+</div>
