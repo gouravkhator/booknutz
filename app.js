@@ -67,7 +67,7 @@ app.post('/charge', (req, res) => {
             currency: 'INR',
             customer: customer.id,
         });
-    }).then(charge => res.render('success'));
+    }).then(charge => res.render('success',{ signedIn: state.signedIn }));
 });
 
 //user routes for sign in and sign out
