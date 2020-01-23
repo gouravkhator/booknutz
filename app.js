@@ -18,7 +18,8 @@ app.use(cookieParser('secret'));
 app.use((req, res, next) => {
     res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
     if (req.signedCookies.user) {
-        state.user = req.signedCookies.user._doc;
+        state.user = req.signedCookies.user;
+        console.log(state.user);
         state.signedIn = true;
     }
     next();
