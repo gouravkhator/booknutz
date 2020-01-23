@@ -18,7 +18,7 @@ app.use(cookieParser('secret'));
 app.use((req, res, next) => {
     res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
     if (req.signedCookies.user) {
-        state.user = Object.assign({}, req.signedCookies.user._doc);
+        state.user = req.signedCookies.user._doc;
         state.signedIn = true;
     }
     next();
@@ -47,6 +47,7 @@ app.get('/', (req, res) => {
     const errorMsg = req.app.get('errorMsg');
     gfs.files.find({}).toArray((err, files) => {
         if (files) {
+            files.reverse();
             res.render('index', {
                 signedIn: state.signedIn,
                 books: files,

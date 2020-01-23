@@ -109,8 +109,7 @@ router.post('/verify', async (req, res) => {
         if (otpInMail === otpUserInput) {
             state.signedIn = true;
             state.user = state.tempUser;
-            let userToStore = Object.assign({}, state.user);
-            res.cookie('user', userToStore, { maxAge: 15 * 60 * 1000, signed: true });
+            res.cookie('user', state.user, { maxAge: 15 * 60 * 1000, signed: true });
             res.redirect('/');
         } else {
             res.render('verify', {
@@ -128,60 +127,60 @@ router.post('/login', async (req, res) => {
     user = req.body;
     try {
         let userfound = await User.findOne({ email: user.email });
-        if (userfound != null && await userfound.passwordIsValid(user.password)) {
+        console.log('On login : ');
+        console.log(userfound);
+        const validFlag = await userfound.passwordIsValid(user.password);
+        if (userfound != null && validFlag) {
             state.signedIn = true;
             state.user = userfound;
-            let userToStore = Object.assign({}, state.user);
-            res.cookie('user', userToStore, { maxAge: 15 * 60 * 1000, signed: true });
+            res.cookie('user', userfound, { maxAge: 15 * 60 * 1000, signed: true });
             res.redirect('/');
         } else {
-            throw 'User not found';
+            throw 'User not found or password not matched';
         }
-    } catch {
+    } catch{
         res.render('userAction', {
             userAction: 'Login',
             user,
             signedIn: state.signedIn,
-            errorMsg: 'User not found'
+            errorMsg: 'User not found or password not matched'
         });
     }
 });
 
 function check_logout_delete_details(req, res, action) {
-    try {
-        if (state.user) {
-            const email = state.user.email;
-            const password = state.user.password;
-            const email1 = req.body.email;
-            const guessedPassword = req.body.password;
+    if (state.user) {
+        const email = state.user.email;
+        const password = state.user.password;
+        const email1 = req.body.email;
+        const guessedPassword = req.body.password;
 
-            //here password is encrypted in state.user and guessedPassword is not encrypted
-            bcrypt.compare(guessedPassword, password, async (err, isMatch) => {
-                if (err || !isMatch || email != email1) {
-                    throw 'User details not matched';
+        //here password is encrypted in state.user and guessedPassword is not encrypted
+        bcrypt.compare(guessedPassword, password).then(isMatch => {
+            if (!isMatch || email !== email1) {
+                throw 'User details not matched';
+            } else if (email === email1) {
+                if (action === 'delete') {
+                    User.findOne({ email: email }).then(user => {
+                        user.remove();
+                    }).catch(err => {
+                        throw 'Error happened, Cannot delete';
+                    });
                 }
-                else if (email === email1) {
-                    if (action === 'delete') {
-                        try {
-                            let user = await User.findOne({ email: email });
-                            user.remove();
-                        } catch{
-                            throw 'Error happened, Cannot delete';
-                        }
-                    }
-                    state.signedIn = false;
-                    state.user = null;
-                    state.tempUser = null;
-                    state.count = 0;
-                    res.clearCookie('user');
-                    res.redirect('/');
-                }
-            });
-        } else {
-            throw 'Error happened, Cannot ' + action;
-        }
-    } catch (err) {
-        req.app.set('errorMsg', err);
+                state.signedIn = false;
+                state.user = null;
+                state.tempUser = null;
+                state.count = 0;
+                req.app.set('errorMsg', null);
+                res.clearCookie('user');
+                res.redirect('/');
+            }
+        }).catch(err => {
+            req.app.set('errorMsg', err);
+            res.redirect('/user/' + action);
+        });
+    } else {
+        req.app.set('errorMsg', 'Error happened Cannot ' + action);
         res.redirect('/user/' + action);
     }
 }

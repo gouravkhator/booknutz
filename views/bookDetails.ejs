@@ -14,7 +14,7 @@
             </script>
             <input type="hidden" name="description" value="<%= book.description %>" />
             <input type="hidden" name="purchasedBookId" value="<%= book._id %>" />
-            <% if(user.purchases.includes(book._id.toString())){ %>
+            <% if(user.purchases.includes(book._id.toString())) { %>
             <p type="button" class="payBtn paidBtn">Purchased</p>
             <% } else { %>
             <button type="submit" class="payBtn">Purchase for Rs. 500</button>
