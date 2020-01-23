@@ -127,8 +127,6 @@ router.post('/login', async (req, res) => {
     user = req.body;
     try {
         let userfound = await User.findOne({ email: user.email });
-        console.log('On login : ');
-        console.log(userfound);
         const validFlag = await userfound.passwordIsValid(user.password);
         if (userfound != null && validFlag) {
             state.signedIn = true;
