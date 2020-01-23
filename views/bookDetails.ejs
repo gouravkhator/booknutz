@@ -6,12 +6,19 @@
             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= stripePublishableKey %>" data-amount="50000" data-currency="INR"
                 data-name="<%= book.title %>" data-description="<%= book.description %>"
-                data-image="/img/marketplace.jpeg" data-locale="auto"></script>
+                data-email="<%= (user && user.email) ? user.email : null %>" data-image="/img/marketplace.jpeg"
+                data-locale="auto"></script>
             <script>
                 //hide default stripe button
                 document.getElementsByClassName('stripe-button-el')[0].style.display = 'none';
             </script>
+            <input type="hidden" name="description" value="<%= book.description %>" />
+            <input type="hidden" name="purchasedBookId" value="<%= book._id %>" />
+            <% if(user.purchases.includes(book._id.toString())){ %>
+            <p type="button" class="payBtn paidBtn">Purchased</p>
+            <% } else { %>
             <button type="submit" class="payBtn">Purchase for Rs. 500</button>
+            <% } %>
         </form>
     </div>
     <div>

@@ -4,7 +4,7 @@
     align-items: center;
 }
 
-.login-page form{
+.login-page form {
     margin-top: 5vh;
 }
 .login-page input{
@@ -13,6 +13,7 @@
     border: 1px solid var(--color-border);
     border-radius: .5rem;
     margin-bottom: .5rem;
+    width: 100%;
 }
 
 .login-page button{

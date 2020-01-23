@@ -1,16 +1,17 @@
 <div class="login-page">
-    <form action="<%= userAction.split(' ').join('').toLowerCase() %>" method="POST">
+    <form action="/user/<%= userAction.split(' ').join('').toLowerCase() %>" method="POST">
         <% if(userAction === 'Sign Up') { %>
         <div>
             <input type="text" placeholder="Username" maxlength="10" name="username" minlength="5"
-                value="<%= (user && user.username) ? user.username: '' %>" />
+                value="<%= (user && user.username) ? user.username: '' %>" required />
         </div>
         <% } %>
         <div>
-            <input type="email" placeholder="Email" name="email" value="<%= (user && user.email) ? user.email: '' %>" />
+            <input type="email" placeholder="Email" name="email" value="<%= (user && user.email) ? user.email: '' %>"
+                required />
         </div>
         <div>
-            <input type="password" placeholder="Password" minlength="8" maxlength="20" name="password" />
+            <input type="password" placeholder="Password" minlength="8" maxlength="20" name="password" required />
         </div>
         <button class="payBtn" type="submit"><%= userAction %></button>
     </form>

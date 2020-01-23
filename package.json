@@ -11,13 +11,16 @@
   "dependencies": {
     "bcrypt": "3.0.7",
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
     "gridfs-stream": "^1.1.1",
     "mongoose": "^5.8.4",
+    "nodemailer": "^6.4.2",
     "stripe": "^7.14.0",
-    "validator": "^12.1.0"
+    "validator": "^12.1.0",
+    "xoauth2": "^1.2.0"
   },
   "description": ""
 }

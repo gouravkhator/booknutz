@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/user');
 const state = require('./_globals');
 const bcrypt = require('bcrypt');
+const sendMail = require('./util/mailSender');
 
 router.get('/login', (req, res) => {
     if (state.user == null) {
@@ -60,19 +61,66 @@ router.post('/signup', async (req, res) => {
         email: req.body.email,
         password: req.body.password
     });
+    state.tempUser = newUser;
+    state.count = 0;
     try {
         await newUser.save();
-        state.signedIn = true;
-        state.user = req.body;
-        res.redirect('/');
-    } catch {
+        //so that any error on params can be checked so save here then if its not verified remove from db
+        const dataFromMail = sendMail();
+        const mailSent = dataFromMail.mailSent;
+        if (mailSent) {
+            res.render('verify', {
+                signedIn: state.signedIn,
+                otp: dataFromMail.otp
+            });
+        } else {
+            throw 'Mail could not be sent';
+        }
+    } catch (err) {
+        let errorMsg = '';
+        //could have printed err but then error on signup would be not Error Signing Up but anything else
+        if (err === 'Mail could not be sent') {
+            errorMsg = err;
+        }
         res.render('userAction', {
             userAction: 'Sign Up',
             user: newUser,
             signedIn: state.signedIn,
-            errorMsg: 'Error Signing Up'
+            errorMsg: errorMsg || 'Error Signing Up'
         });
     }
+});
+
+router.post('/verify', async (req, res) => {
+    state.count++;
+    if (state.count >= 3) {
+        try {
+            let user = await User.findOne({ email: state.tempUser.email });
+            user.remove();
+            state.tempUser = null;
+            state.count = 0;
+            res.redirect('/user/signup');
+        } catch{
+            res.redirect('/');
+        }
+    } else {
+        const otpUserInput = req.body.otp;
+        const otpInMail = req.body.otpInMail;
+        if (otpInMail === otpUserInput) {
+            state.signedIn = true;
+            state.user = state.tempUser;
+            let userToStore = Object.assign({}, state.user);
+            res.cookie('user', userToStore, { maxAge: 15 * 60 * 1000, signed: true });
+            res.redirect('/');
+        } else {
+            res.render('verify', {
+                signedIn: state.signedIn,
+                otp: otpInMail,
+                errorMsg: 'OTP incorrect please try again..'
+            });
+        }
+    }
+
 });
 
 router.post('/login', async (req, res) => {
@@ -83,6 +131,8 @@ router.post('/login', async (req, res) => {
         if (userfound != null && await userfound.passwordIsValid(user.password)) {
             state.signedIn = true;
             state.user = userfound;
+            let userToStore = Object.assign({}, state.user);
+            res.cookie('user', userToStore, { maxAge: 15 * 60 * 1000, signed: true });
             res.redirect('/');
         } else {
             throw 'User not found';
@@ -121,6 +171,9 @@ function check_logout_delete_details(req, res, action) {
                     }
                     state.signedIn = false;
                     state.user = null;
+                    state.tempUser = null;
+                    state.count = 0;
+                    res.clearCookie('user');
                     res.redirect('/');
                 }
             });

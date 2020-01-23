@@ -19,7 +19,8 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+    purchases: [String]
 });
 
 userSchema.pre('save', async function (next) {

@@ -20,10 +20,12 @@ router.get('/show/:filename', (req, res) => {
                 const title = file.metadata.title;
                 const description = file.metadata.description;
                 const book = {
-                    title, description, filename: file.filename
+                    title, description, filename: file.filename,
+                    _id: file._id
                 };
                 res.render('bookDetails', {
                     book,
+                    user: state.user,
                     signedIn: state.signedIn,
                     stripePublishableKey: keys.stripePublishableKey
                 });

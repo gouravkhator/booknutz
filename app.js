@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const expressLayouts = require('express-ejs-layouts');
 const Grid = require('gridfs-stream');
 const app = express();
@@ -7,10 +8,21 @@ const keys = require('./config/keys');
 const stripe = require('stripe')(keys.stripeSecretKey);
 const mongoose = require('mongoose');
 const state = require('./routes/_globals');
+const User = require('./models/user');
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(expressLayouts);
+app.use(cookieParser('secret'));
+//Cache disable for revalidation on logout or login or on purchase
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    if (req.signedCookies.user) {
+        state.user = Object.assign({}, req.signedCookies.user._doc);
+        state.signedIn = true;
+    }
+    next();
+});
 app.set('layout', 'layouts/layout');
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -58,16 +70,33 @@ app.post('/charge', (req, res) => {
     const amount = 50000;
     //First create customer then create charge then render success page
     stripe.customers.create({
-        email: req.body.stripeEmail,
+        email: state.user.email,
         source: req.body.stripeToken
     }).then(customer => {
         stripe.charges.create({
             amount,
-            // description: 'Web Dev Ebook', //TODO: add description dynamically
+            description: req.body.description,
             currency: 'INR',
             customer: customer.id,
         });
-    }).then(charge => res.render('success',{ signedIn: state.signedIn }));
+    }).then(async charge => {
+        const bookId = req.body.purchasedBookId;
+        let user = null;
+        try {
+            state.user.purchases.unshift(bookId);
+            user = await User.findOne({ email: state.user.email });
+            user.purchases.unshift(bookId);
+            await user.save(); //updating user
+            res.render('success', { signedIn: state.signedIn });
+        } catch{
+            //if updating creates an error
+            req.app.set('errorMsg', 'Could Not Purchase Book');
+            if (state.user.purchases.includes(bookId)) {
+                state.user.purchases.shift(); //removing book id from state in client
+            }
+            res.redirect('/');
+        }
+    });
 });
 
 //user routes for sign in and sign out
