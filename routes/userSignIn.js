@@ -128,7 +128,7 @@ router.post('/login', async (req, res) => {
     try {
         let userfound = await User.findOne({ email: user.email });
         const validFlag = await userfound.passwordIsValid(user.password);
-        if (userfound != null && validFlag) {
+        if (userfound && validFlag) {
             state.signedIn = true;
             state.user = userfound;
             res.cookie('user', userfound, { maxAge: 15 * 60 * 1000, signed: true });

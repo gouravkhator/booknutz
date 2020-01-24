@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 const bcrypt = require('bcrypt');
 
 const userSchema = mongoose.Schema({
@@ -11,10 +10,7 @@ const userSchema = mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true,
-        validate: value => {
-            return validator.isEmail(value)
-        }
+        unique: true
     },
     password: {
         type: String,
@@ -25,9 +21,11 @@ const userSchema = mongoose.Schema({
 
 userSchema.pre('save', async function (next) {
     try {
-        const hash = await bcrypt.hash(this.password, 16.5);
-        this.password = hash;
-        next();
+        if (this.isModified('password')) { //as save was called twice 1. after verify 2. after purchase
+            const hash = await bcrypt.hash(this.password, 16.5);
+            this.password = hash;
+            next();
+        }
     } catch (err) {
         next(err);
     }

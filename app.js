@@ -9,6 +9,7 @@ const stripe = require('stripe')(keys.stripeSecretKey);
 const mongoose = require('mongoose');
 const state = require('./routes/_globals');
 const User = require('./models/user');
+const sendMail = require('./routes/util/mailSender');
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -90,6 +91,7 @@ app.post('/charge', (req, res) => {
             await user.save(); //updating user
             res.cookie('user', state.user, { maxAge: 15 * 60 * 1000, signed: true });
             res.render('success', { signedIn: state.signedIn });
+            sendMail('purchase', `Congrats ${state.user.username} on your purchase of ebook(ID: ${bookId}).<br> Thank You`);
         } catch{
             //if updating creates an error
             req.app.set('errorMsg', 'Could Not Purchase Book');
