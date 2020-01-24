@@ -88,6 +88,7 @@ app.post('/charge', (req, res) => {
             user = await User.findOne({ email: state.user.email });
             user.purchases.unshift(bookId);
             await user.save(); //updating user
+            res.cookie('user', state.user, { maxAge: 15 * 60 * 1000, signed: true });
             res.render('success', { signedIn: state.signedIn });
         } catch{
             //if updating creates an error
