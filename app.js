@@ -11,6 +11,8 @@ const state = require('./routes/_globals');
 const User = require('./models/user');
 const sendMail = require('./routes/util/mailSender');
 
+//Text Compression
+app.use(require('compression')());
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(expressLayouts);
@@ -43,6 +45,14 @@ conn.once('open', () => {
 });
 conn.on('error', (err) => console.log(err));
 
+//http to https redirect
+app.get('*', (req, res, next) => {
+    if (!req.secure) {
+        res.redirect("https://" + req.hostname + req.originalUrl);
+    } else {
+        next();
+    }
+});
 //Home Page
 app.get('/', (req, res) => {
     const errorMsg = req.app.get('errorMsg');
