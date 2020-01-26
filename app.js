@@ -45,14 +45,6 @@ conn.once('open', () => {
 });
 conn.on('error', (err) => console.log(err));
 
-//http to https redirect
-app.get('*', (req, res, next) => {
-    if (!req.secure) {
-        res.redirect("https://" + req.hostname + req.originalUrl);
-    } else {
-        next();
-    }
-});
 //Home Page
 app.get('/', (req, res) => {
     const errorMsg = req.app.get('errorMsg');
