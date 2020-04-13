@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const expressLayouts = require('express-ejs-layouts');
 const Grid = require('gridfs-stream');
@@ -28,8 +27,7 @@ app.use((req, res, next) => {
 });
 app.set('layout', 'layouts/layout');
 app.use(express.static('public'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
 
 //Connetion with db
 let url = keys.mongoUri;

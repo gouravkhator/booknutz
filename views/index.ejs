@@ -3,7 +3,7 @@
     <ul>
         <% books.forEach(book => { %>
         <li>
-            <img src="/image/<%= book.filename %>" class="img-fluid img-small" height="200" width="150"
+            <img src="/image/<%= book.filename %>" alt="Loading..." class="img-fluid img-small" height="200" width="150"
                 loading="lazy" />
             <a type="button" class="payBtn" href="/book/show/<%= book.filename %>">View Book</a>
         </li>

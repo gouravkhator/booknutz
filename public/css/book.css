@@ -1,3 +1,4 @@
+/*images with aspect-ratio = 0.7 meaning width/height=0.7*/
 /*classes in bookDetails.ejs */
 .book-title {
     font-size: 2.5rem;
@@ -18,14 +19,14 @@
 
 /*all images classes*/
 .img-fluid{
-    width: 19rem;
-    height: 25rem;
+    width: 17.5rem; /*old: 19*/
+    height: 25rem; 
     border: 1px solid var(--color-border);
     border-radius: .5rem;
 }
 
 .img-small{ /* small img for recently added books*/
-    width: 200px;
+    width: 210px; /*old: 200*/
     height: 300px;
 }
 
@@ -73,7 +74,7 @@
 
 @media(max-width:350px){
     .img-fluid{
-        width:12rem;
+        width:11.9rem; /*old: 12*/
         height: 17rem;
     }
 }
