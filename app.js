@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const expressLayouts = require('express-ejs-layouts');
 const Grid = require('gridfs-stream');
+const bodyParser = require('body-parser'); //EDITED
 const app = express();
 const keys = require('./config/keys');
 const stripe = require('stripe')(keys.stripeSecretKey);
@@ -27,7 +28,10 @@ app.use((req, res, next) => {
 });
 app.set('layout', 'layouts/layout');
 app.use(express.static('public'));
-app.use(express.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 //Connetion with db
 let url = keys.mongoUri;
