@@ -1,11 +1,16 @@
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config({
+        path: '.env',
+    });
+}
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const expressLayouts = require('express-ejs-layouts');
 const Grid = require('gridfs-stream');
-const bodyParser = require('body-parser'); //EDITED
+const bodyParser = require('body-parser');
 const app = express();
-const keys = require('./config/keys');
-const stripe = require('stripe')(keys.stripeSecretKey);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const mongoose = require('mongoose');
 const state = require('./routes/_globals');
 const User = require('./models/user');
@@ -33,8 +38,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-//Connetion with db
-let url = keys.mongoUri;
+//Connection with db
+let url = process.env.MONGO_URL;
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -57,7 +62,7 @@ app.get('/', (req, res) => {
                 signedIn: state.signedIn,
                 books: files,
                 errorMsg: errorMsg ? errorMsg : null,
-                stripePublishableKey: keys.stripePublishableKey
+                stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
             });
             req.app.set('errorMsg', null);
         } else {

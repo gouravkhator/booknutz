@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const keys = require('../config/keys');
 const state = require('./_globals');
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
@@ -27,7 +26,7 @@ router.get('/show/:filename', (req, res) => {
                     book,
                     user: state.user,
                     signedIn: state.signedIn,
-                    stripePublishableKey: keys.stripePublishableKey
+                    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY
                 });
             } else {
                 res.redirect('/');

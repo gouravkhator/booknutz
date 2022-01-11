@@ -22,5 +22,9 @@
     "stripe": "^7.14.0",
     "xoauth2": "^1.2.0"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "dotenv": "^11.0.0",
+    "nodemon": "^2.0.15"
+  }
 }
