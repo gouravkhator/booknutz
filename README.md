@@ -1,48 +1,50 @@
 # Ebooks-go-app
+
 Ebook Purchase Website
-
-You can Run this Project using :
-npm start
-
-Dev Server by:
-npm run dev
 
 ## Prerequisites
 
 ### Install and Setup
 
-Install all dependencies:
+- Firstly install g++ on your system, as our project requires `bcrypt` library, and that does not work without g++ compiler in your system.
 
-```sh
-npm i
-```
+- Next, Install all npm dependencies:
 
-Make a .env file in the project root, and add the mongo url, stripe api keys, and oauth 2.0 client keys and tokens like below:
+  ```sh
+  npm i
+  ```
 
-```
-STRIPE_PUBLISHABLE_KEY=<stripe-publishable-key>
-STRIPE_SECRET_KEY=<stripe-secret-key>
-MONGO_URL=<mongodb-database-url>
-MAIL_CLIENT_ID=<google-oauth-client-id>
-MAIL_CLIENT_SECRET=<google-oauth-client-secret>
-MAIL_REFRESH_TOKEN=<google-oauth-refresh-token>
-MAIL_ACCESS_TOKEN=<google-oauth-access-token>
-```
+- Refer the `.env.sample` file and create a `.env` file in the project root, with the correct details.
+
+## Run the Project
+
+- You can Run this Project by below command:
+
+  ```sh
+  npm start
+  ```
+
+- Run the Dev Server by below command:
+
+  ```sh
+  npm run dev
+  ```
 
 ## Test Account Details
 
-* Stripe Card details:
+- Test Login to this ebooks-go-app webapp:
 
-    ```
-    Card Number: 4242 4242 4242 4242
-    CVV: <any 3-digit random number>
-    Expiry Date: <any valid date in the future>
-    ```
+  ```
+  Username: test_account
+  Mail: ruralities_baited@aleeas.com
+  Password: gouravkhator
+  ```
 
-* Test Login to ebooks-go-app:
+- Stripe Card details for testing out the purchase feature:
 
-    ```
-    Username: test_account
-    Mail: ruralities_baited@aleeas.com
-    Password: gouravkhator
-    ```
+  ```
+  Card Number: 4242 4242 4242 4242
+  CVV: <any 3-digit random number>
+  Expiry Date: <any valid date in the future>
+  ```
+  

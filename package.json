@@ -2,14 +2,13 @@
   "name": "ebooks-goapp",
   "version": "1.0.0",
   "main": "app.js",
+  "description": "Ebooks Go App -- An app to allow users purchase awesome listed ebooks online",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "bcrypt": "3.0.7",
+    "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
@@ -22,9 +21,12 @@
     "stripe": "^7.14.0",
     "xoauth2": "^1.2.0"
   },
-  "description": "",
   "devDependencies": {
     "dotenv": "^11.0.0",
     "nodemon": "^2.0.15"
-  }
+  },
+  "author": {
+    "name": "Gourav Khator"
+  },
+  "license": "Apache-2.0"
 }
