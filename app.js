@@ -177,5 +177,11 @@ app.get("/*", (req, res) => {
   res.render("404");
 });
 
-const PORT = process.env.SERVER_PORT || 3000;
-app.listen(PORT, () => console.log(`Server started on ${PORT}`));
+const SERVER_PORT = process.env.SERVER_PORT || 3000;
+
+// have to add hostname as "0.0.0.0" or else heroku gives error as linked below:
+// Issue: https://github.com/keystonejs/keystone-classic/issues/3994
+// Solution: https://help.heroku.com/P1AVPANS/why-is-my-node-js-app-crashing-with-an-r10-error
+app.listen(SERVER_PORT, "0.0.0.0", () =>
+  console.log(`Server started on ${SERVER_PORT}`)
+);
