@@ -47,4 +47,3 @@ Ebook Purchase Website
   CVV: <any 3-digit random number>
   Expiry Date: <any valid date in the future>
   ```
-  
