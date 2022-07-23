@@ -47,3 +47,34 @@ Ebook Purchase Website
   CVV: <any 3-digit random number>
   Expiry Date: <any valid date in the future>
   ```
+
+## Deployment to Heroku
+
+Deployment to Heroku requires below steps:
+
+1. Make a `Procfile` in the root directory of your project, and add below lines:
+
+   ```
+   web: node app.js
+   ```
+
+   Note: Here, we write `web:` followed by the command to start the expressjs server.
+
+2. Edit the express app file, here it is `app.js` to contain below lines:
+
+   ```js
+   /*
+   We have to keep the environment variable name as PORT only, 
+   as heroku injects `PORT` environment variable automatically..
+   and we don't need to pass PORT to the environment variables of Heroku explicitly.
+   
+   I have to research more if we can keep other environment names also.. I think we should be able to, but would confirm after researching..
+   */
+   const PORT = process.env.PORT || 3000;
+
+   /*
+    Also we have to add hostname, as "0.0.0.0" or else heroku gives error as linked below:
+    Issue mentioned online: https://github.com/keystonejs/keystone-classic/issues/3994
+    */
+   app.listen(PORT, "0.0.0.0", () => console.log(`Server started on ${PORT}`));
+   ```

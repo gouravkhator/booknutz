@@ -178,13 +178,17 @@ app.get("/*", (req, res) => {
 });
 
 /*
-Keeping environment variable as PORT, 
-as probably heroku injects `PORT` environment variable automatically..
-and we don't need to pass PORT to the environment of Heroku.
+We have to keep the environment variable name as PORT only, 
+as heroku injects `PORT` environment variable automatically..
+and we don't need to pass PORT to the environment variables of Heroku explicitly.
+
+I have to research more if we can keep other environment names also.. 
+I think we should be able to, but would confirm after researching..
 */
 const PORT = process.env.PORT || 3000;
 
-// have to add hostname as "0.0.0.0" or else heroku gives error as linked below:
-// Issue: https://github.com/keystonejs/keystone-classic/issues/3994
-// Solution: https://help.heroku.com/P1AVPANS/why-is-my-node-js-app-crashing-with-an-r10-error
+/*
+Also we have to add hostname, as "0.0.0.0" or else heroku gives error as linked below:
+Issue mentioned online: https://github.com/keystonejs/keystone-classic/issues/3994
+*/
 app.listen(PORT, "0.0.0.0", () => console.log(`Server started on ${PORT}`));
