@@ -119,7 +119,7 @@ app.get("/*", (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  // console.error(err);
+  console.error(err);
 
   const getPageFromUri = (targetUri = "/") => {
     return {
