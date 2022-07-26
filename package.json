@@ -1,11 +1,11 @@
 {
   "name": "ebooks-goapp",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "./src/app.js",
   "description": "Ebooks Go App -- An app to allow users purchase awesome listed ebooks online",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
   },
   "dependencies": {
     "bcrypt": "^3.0.7",
@@ -15,9 +15,15 @@
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.3",
     "gridfs-stream": "^1.1.1",
+    "method-override": "^3.0.0",
     "mongoose": "^5.8.4",
+    "multer": "^1.4.4",
+    "multer-gridfs-storage": "^5.0.2",
     "nodemailer": "^6.4.2",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
     "stripe": "^7.14.0",
     "xoauth2": "^1.2.0"
   },
