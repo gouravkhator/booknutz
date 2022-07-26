@@ -7,13 +7,15 @@ xoauth2 is required in the background, as a side-effect
 const xoauth2 = require("xoauth2");
 
 const sendMail = (target_email, purpose = "verify", msg = "") => {
+  let sender_email = process.env.SENDER_MAIL_ID;
+
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
     auth: {
       type: "OAuth2",
-      user: "gouravkhator9@gmail.com",
+      user: process.env.SENDER_MAIL_ID,
       clientId: process.env.MAIL_CLIENT_ID,
       clientSecret: process.env.MAIL_CLIENT_SECRET,
       refreshToken: process.env.MAIL_REFRESH_TOKEN,
@@ -25,7 +27,7 @@ const sendMail = (target_email, purpose = "verify", msg = "") => {
     //as Math.random gives number between 0 and 1 inclusive of 0 but not 1 so 6-digit will only be there
 
     let mailOptions = {
-      from: "Ebooks-go-app <gouravkhator9@gmail.com",
+      from: `Ebooks-go-app ${sender_email}`,
       to: target_email,
       subject: "Verification Email",
       html: `<h2>Your OTP is ${otp}.</h2><br> <h3>Enter this otp in the verification page.<h3> <h3>Please don't share with anyone.</h3>`,
@@ -47,9 +49,9 @@ const sendMail = (target_email, purpose = "verify", msg = "") => {
         otp,
       };
     }
-  } else {
+  } else if (purpose === "purchase") {
     let mailOptions = {
-      from: "Ebooks-go-app <gouravkhator9@gmail.com",
+      from: `Ebooks-go-app <${sender_email}`,
       to: target_email,
       subject: "Purchase Email",
       html: `<h2>${msg}</h2>`,

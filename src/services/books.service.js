@@ -1,6 +1,6 @@
 const crypto = require("crypto");
 const multer = require("multer");
-const GridFsStorage = require("multer-gridfs-storage");
+const { GridFsStorage } = require("multer-gridfs-storage");
 const path = require("path");
 
 const {
@@ -83,7 +83,15 @@ async function fetch_all_books(reverse_order = true) {
           files.reverse();
         }
 
-        files = files.map((file) => ({ bookId: "" + file._id, ...file }));
+        files = files.map((file) => ({
+          // default values of No title or No description is given, as mostly we will have the title and description in the database
+          title: file?.metadata?.title ?? "No title",
+          description: file?.metadata?.description ?? "No description",
+          filename: file.filename,
+          _id: file._id,
+          bookId: "" + file._id,
+        }));
+
         resolve(files);
       }
     });
@@ -106,8 +114,9 @@ async function fetch_single_book(bookId) {
         const coverImageStream = gfs.createReadStream(file.filename);
 
         const bookObj = {
-          title: file.metadata.title,
-          description: file.metadata.description,
+          // default values of No title or No description is given, as mostly we will have the title and description in the database
+          title: file?.metadata?.title ?? "No title",
+          description: file?.metadata?.description ?? "No description",
           filename: file.filename,
           _id: file._id,
           bookId: "" + file._id,
@@ -119,16 +128,23 @@ async function fetch_single_book(bookId) {
   });
 }
 
-async function upload_book(title, description, file) {
+async function upload_book(req, res) {
   return new Promise((resolve, reject) => {
     get_mongodb_upload_function().single("file")(req, res, async (err) => {
+      /*
+      default values of "No title" or "No description" is given just for safety..
+      But, admins would obviously provide both the title and description while uploading book..
+      */
+      const title = req.body?.title ?? "No title";
+      const description = req.body?.description ?? "No description";
+
       if (err) {
         reject("Could not upload the provided book. Please try again!!");
       } else {
         const gfs = await get_gridfs_ref();
 
         gfs.files.update(
-          { filename: file.filename },
+          { filename: req.file?.filename },
           {
             $set: {
               metadata: {

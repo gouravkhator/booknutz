@@ -12,8 +12,6 @@ const {
   delete_book_controller,
 } = require("../controllers/books.controller");
 
-const { AppError } = require("../utils/errors.util");
-
 const router = express.Router();
 
 router.get("/:bookId/view", allow_signedin_users_only, view_book_controller);

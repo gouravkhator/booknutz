@@ -1,6 +1,6 @@
 {
   "name": "ebooks-goapp",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "./src/app.js",
   "description": "Ebooks Go App -- An app to allow users purchase awesome listed ebooks online",
   "scripts": {

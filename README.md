@@ -1,6 +1,8 @@
 # Ebooks-go-app
 
-Ebook Purchase Website
+**_Hey Credit Card consumers_**, bored of life??
+
+Scroll through some awesome **Ebooks** available to purchase within seconds..
 
 ## Prerequisites
 
@@ -14,7 +16,7 @@ Ebook Purchase Website
   npm i
   ```
 
-- Refer the `.env.sample` file and create a `.env` file in the project root, with the correct details.
+- Refer the `.env.sample` file and create a `.env.local` file in the project root, with the correct details.
 
 ## Run the Project
 

@@ -42,6 +42,8 @@
       <% books.forEach(book => { %>
       <li>
         <div>
+          <h2><%= book.title %></h2>
+          <h3><%= book.description %></h3>
           <img
             src="/books/<%= book.bookId %>/cover"
             alt="Loading..."

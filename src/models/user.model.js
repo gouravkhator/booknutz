@@ -26,9 +26,11 @@ const userSchema = mongoose.Schema({
   isAdmin: {
     type: Boolean,
     required: true,
-    default: false,
-    // roles will be mutable only in the database end, and not even in admin end, once it is set.
-    immutable: true, // for improving security, and no one can edit the role form webapp or some requests
+    /*
+    roles will be mutable only in the database end, and should be immutable in other places once it is set.
+    This is done to improve security, so that no one can edit the role form webapp or some requests
+    */
+    immutable: true,
   },
 });
 

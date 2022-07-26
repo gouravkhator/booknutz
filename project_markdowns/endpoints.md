@@ -4,6 +4,8 @@
 
 > (\*\*) denotes that the route should be accessible to signedin users only..
 
+> (\*\*\*) denotes that the route should be accessible to only the signedin and verified users.
+
 ## Index page
 
 - `GET /`: Showcases all the books to normal authorized/unauthorized user
@@ -19,9 +21,10 @@
 
 - `GET /auth/signup`
 - `POST /auth/signup`
-- `POST /auth/verify`
 - `GET /auth/login`
 - `POST /auth/login`
+- `GET /auth/verify` (\*\*)
+- `POST /auth/verify` (\*\*)
 
 ## Book (\*\*)
 
@@ -32,7 +35,7 @@
 
 ## Payment Gateway (\*\*)
 
-- `POST /payment`
+- `POST /payment` (\*\*\*)
 
 ## Admin (\*)
 

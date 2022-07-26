@@ -8,7 +8,7 @@
       height="250"
     />
   </div>
-  
+
   <div class="book-written-details">
     <h2 class="book-title"><%= book.title %></h2>
     <h3 class="book-description"><%= book.description %></h3>
@@ -40,7 +40,7 @@
       <input type="hidden" name="purchasedBookId" value="<%= book.bookId %>" />
 
       <% if(user.purchases.includes(book.bookId)) { %>
-      <p type="button" class="normalBtn" id="paidBtn">Purchased</p>
+      <a type="button" class="normalBtn" id="paidBtn">Purchased</a>
       <% } else { %>
       <button type="submit" class="normalBtn submitBtn" id="purchaseBtn">
         Purchase for Rs. 500

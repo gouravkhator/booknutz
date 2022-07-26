@@ -20,7 +20,6 @@ const { passEnvToLocals } = require("./middlewares/global.middleware");
 const {
   allow_admins_only,
   allow_signedin_users_only,
-  allow_signedout_users_only,
 } = require("./middlewares/auth.middleware");
 
 const { AppError } = require("./utils/errors.util");
@@ -63,9 +62,6 @@ app.use(
     },
   })
 );
-
-// commenting cache_revalidate_middleware, as we are using signed cookies and passport session based auth
-// app.use(cache_revalidate_middleware);
 
 // initialize passport and its respective session too, for having the auth management
 app.use(passport.initialize());

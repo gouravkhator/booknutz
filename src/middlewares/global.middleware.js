@@ -1,29 +1,10 @@
 const { fetch_all_books } = require("../services/books.service");
 const { AppError } = require("../utils/errors.util");
-const state = require("../utils/_globals");
-
-function cache_revalidate_middleware(req, res, next) {
-  res.set(
-    "Cache-Control",
-    "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
-  );
-
-  if (req.signedCookies.user) {
-    state.user = req.signedCookies.user;
-    state.signedIn = true;
-  } else {
-    // if the signed cookies does not contain user, then reset the user and signed in global state
-    state.user = null;
-    state.signedIn = false;
-  }
-
-  next();
-}
 
 async function passEnvToLocals(req, res, next) {
   try {
     const books = await fetch_all_books();
-    
+
     res.locals = {
       stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
 
@@ -51,6 +32,5 @@ async function passEnvToLocals(req, res, next) {
 }
 
 module.exports = {
-  cache_revalidate_middleware,
   passEnvToLocals,
 };

@@ -48,8 +48,40 @@ function allow_signedout_users_only(req, res, next) {
   }
 }
 
+function allow_verified_users_only(req, res, next) {
+  if (req.isAuthenticated()) {
+    // logged in
+    if (req.user.isVerified === true) {
+      // logged in and verified account
+      return next();
+    } else {
+      // logged in yet unverified account
+      return next(
+        new AppError({
+          message:
+            "Only users with verified accounts can make this request. Please verify the email address to continue..",
+          shortMsg: "non-verified-email-restricted",
+          statusCode: 401,
+          targetUri: "/",
+        })
+      );
+    }
+  } else {
+    // not logged in
+    return next(
+      new AppError({
+        statusCode: 401,
+        message: "Please login/signup to make this request..",
+        shortMsg: "not-logged-in",
+        targetUri: "/",
+      })
+    );
+  }
+}
+
 module.exports = {
   allow_admins_only,
   allow_signedin_users_only,
   allow_signedout_users_only,
+  allow_verified_users_only,
 };

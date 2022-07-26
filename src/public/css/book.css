@@ -53,6 +53,8 @@
 
 #paidBtn {
   background-color: hsl(var(--color-success-hue), 90%, 40%);
+  display: block;
+  padding: 5px 10px 5px 10px;
 }
 
 #paidBtn:hover {
@@ -73,6 +75,8 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  text-align: center;
+  margin-top: 2rem;
 }
 
 /* css classes for all images */
