@@ -8,8 +8,7 @@
     "dev": "nodemon src/app.js"
   },
   "dependencies": {
-    "bcrypt": "^3.0.7",
-    "body-parser": "^1.19.0",
+    "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
     "ejs": "^3.0.1",
@@ -34,6 +33,18 @@
   "engines": {
     "node": "16.16.x"
   },
+  "keywords": [
+    "ebooks",
+    "purchase",
+    "stripe"
+  ],
+  "repository": {
+    "url": "https://github.com/gouravkhator/Ebooks-go-app"
+  },
+  "bugs": {
+    "url": "https://github.com/gouravkhator/Ebooks-go-app/issues"
+  },
+  "readme": "https://github.com/gouravkhator/Ebooks-go-app/blob/master/README.md",
   "author": {
     "name": "Gourav Khator"
   },

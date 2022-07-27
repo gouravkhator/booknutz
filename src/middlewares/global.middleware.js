@@ -1,7 +1,7 @@
 const { fetch_all_books } = require("../services/books.service");
 const { AppError } = require("../utils/errors.util");
 
-async function passEnvToLocals(req, res, next) {
+async function passGlobalVarsToEjsPage(req, res, next) {
   try {
     const books = await fetch_all_books();
 
@@ -32,5 +32,5 @@ async function passEnvToLocals(req, res, next) {
 }
 
 module.exports = {
-  passEnvToLocals,
+  passGlobalVarsToEjsPage,
 };

@@ -1,6 +1,6 @@
 # Ebooks-go-app
 
-**_Hey Credit Card consumers_**, bored of life??
+**_Hey booknuts_**, bored of life??
 
 Scroll through some awesome **Ebooks** available to purchase within seconds..
 
@@ -8,7 +8,7 @@ Scroll through some awesome **Ebooks** available to purchase within seconds..
 
 ### Install and Setup
 
-- Firstly install g++ on your system, as our project requires `bcrypt` library, and that does not work without g++ compiler in your system.
+> Note: Here we are using `bcryptjs` instead of `bcrypt`, as bcrypt requires `g++` compiler to be installed in the system, and we would want to deploy this website to heroku, and we want to keep the deployment simple for now.
 
 - Next, Install all npm dependencies:
 

@@ -15,7 +15,7 @@ const expressLayouts = require("express-ejs-layouts");
 const { initializePassport } = require("./services/passport_init.service");
 const { connect_mongodb } = require("./services/mongodb_connect.service");
 
-const { passEnvToLocals } = require("./middlewares/global.middleware");
+const { passGlobalVarsToEjsPage } = require("./middlewares/global.middleware");
 
 const {
   allow_admins_only,
@@ -85,7 +85,8 @@ app.use(
   })
 );
 
-app.use(passEnvToLocals);
+// pass the global user settings or others to the res.locals so that we can render them in any ejs page
+app.use(passGlobalVarsToEjsPage);
 
 // Home Page
 app.get("/", async (req, res) => {
@@ -119,7 +120,7 @@ app.get("/*", (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.error(err);
+  // console.error(err);
 
   const getPageFromUri = (targetUri = "/") => {
     return {
