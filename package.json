@@ -1,8 +1,8 @@
 {
-  "name": "ebooks-goapp",
+  "name": "nutzread",
   "version": "2.0.0",
   "main": "./src/app.js",
-  "description": "Ebooks Go App -- An app to allow users purchase awesome listed ebooks online",
+  "description": "Nutzread -- An app to allow booknuts, purchase awesome listed ebooks online",
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
@@ -39,12 +39,12 @@
     "stripe"
   ],
   "repository": {
-    "url": "https://github.com/gouravkhator/Ebooks-go-app"
+    "url": "https://github.com/gouravkhator/nutzread"
   },
   "bugs": {
-    "url": "https://github.com/gouravkhator/Ebooks-go-app/issues"
+    "url": "https://github.com/gouravkhator/nutzread/issues"
   },
-  "readme": "https://github.com/gouravkhator/Ebooks-go-app/blob/master/README.md",
+  "readme": "https://github.com/gouravkhator/nutzread/blob/master/README.md",
   "author": {
     "name": "Gourav Khator"
   },

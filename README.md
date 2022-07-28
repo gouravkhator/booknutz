@@ -1,4 +1,4 @@
-# Ebooks-go-app
+# Nutzread
 
 **_Hey booknuts_**, bored of life??
 
@@ -34,7 +34,7 @@ Scroll through some awesome **Ebooks** available to purchase within seconds..
 
 ## Test Account Details
 
-- Test Login to this ebooks-go-app webapp:
+- Test Login to this `nutzread` webapp:
 
   ```
   Username: test_account
