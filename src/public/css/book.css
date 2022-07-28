@@ -116,7 +116,7 @@
   border-color: hsl(var(--color-danger-hue), 80%, 60%);
   border-width: 2px;
   text-align: center;
-  background-image: url("/img/book-background-image.jpeg");
+  background-image: url("/img/book-background-image.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }

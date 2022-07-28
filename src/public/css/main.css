@@ -9,6 +9,7 @@
   --color-background-dark: hsl(var(--color-base-hue), 100%, 30%);
   --color-background-light: hsl(var(--color-base-hue), 100%, 80%);
   --color-text-dark: hsl(var(--color-base-hue), 100%, 5%);
+  --color-text-light: hsl(var(--color-base-hue), 100%, 95%);
   --color-border: hsl(var(--color-base-hue), 100%, 60%);
   --color-danger: hsl(var(--color-danger-hue), 90%, 60%);
   --color-secondary-hue: calc(var(--color-base-hue) + 50);

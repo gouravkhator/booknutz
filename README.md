@@ -1,10 +1,20 @@
 # booknutz
 
+[![Apache](https://img.shields.io/badge/license-Apache-blue.svg)](https://github.com/gouravkhator/booknutz/blob/master/LICENSE.md)
+
 **_Hey booknuts_**, bored of life??
 
 Dig into this nut, to xplore some awesome **E-books**..
 
 This is **booknutz**, a service for booknuts, keeping those nerdy bibliophiles in mind, whilst creating this awesome service..
+
+## Website Snapshots
+
+![Booknutz Home Page](website_snapshots/home_page.png)
+
+![Ebook Details Page](website_snapshots/ebook_details_page.png)
+
+![Stripe Purchase Prompt](website_snapshots/ebook_purchase_prompt.png)
 
 ## Only blocking issue in this project
 
@@ -14,7 +24,7 @@ In most of the cloud deployment and hosting platforms, they don't allow us to se
 
 Refer [this linked heroku article](https://devcenter.heroku.com/articles/cookies-and-herokuapp-com) on the issue, and why they restrain from allowing the cookies on the projects, hosted on subdomains of `.herokuapp.com`.
 
-### Solutions
+### Solutions for this issue
 
 One and Only solution as per my knowledge is to use the paid custom domains, and this problem won't be there for sure.
 
@@ -26,7 +36,7 @@ To donate in any way possible, please reach out to me on mail `gouravkhator9@gma
 
 ### Install and Setup
 
-> Note: Here we are using `bcryptjs` instead of `bcrypt`, as bcrypt requires `g++` compiler to be installed in the system, and we would want to deploy this website to heroku, and we want to keep the deployment simple for now.
+> Note: Here we are using `bcryptjs` instead of `bcrypt`, as bcrypt requires `g++` compiler to be installed in the system, and we would want to deploy this website on some cloud hosting platform, so we want to keep the deployment simple for now.
 
 - Next, Install all npm dependencies:
 
@@ -34,7 +44,7 @@ To donate in any way possible, please reach out to me on mail `gouravkhator9@gma
   npm i
   ```
 
-- Refer the `.env.sample` file and create a `.env.local` file in the project root, with the correct details.
+- Refer the `<project-root>/.env.sample` file and create a `.env.local` file in the `<project-root>/src` folder, with the correct details.
 
 ## Run the Project
 

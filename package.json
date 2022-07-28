@@ -36,7 +36,9 @@
   "keywords": [
     "ebooks",
     "purchase",
-    "stripe"
+    "stripe",
+    "booknuts",
+    "bibliophiles"
   ],
   "repository": {
     "url": "https://github.com/gouravkhator/booknutz"

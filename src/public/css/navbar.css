@@ -1,9 +1,8 @@
 .header-title {
-  color: var(--color-text-dark);
+  color: var(--color-text-light);
   text-decoration: none;
   font-size: 1.5rem;
   font-weight: bold;
-  /* flex: 1; don't know but worked */
 }
 
 .header-nav {
