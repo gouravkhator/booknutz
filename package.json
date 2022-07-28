@@ -1,8 +1,8 @@
 {
-  "name": "nutzread",
+  "name": "booknutz",
   "version": "2.0.0",
   "main": "./src/app.js",
-  "description": "Nutzread -- An app to allow booknuts, purchase awesome listed ebooks online",
+  "description": "Booknutz -- An app to allow booknuts, purchase awesome listed ebooks online",
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
@@ -39,12 +39,12 @@
     "stripe"
   ],
   "repository": {
-    "url": "https://github.com/gouravkhator/nutzread"
+    "url": "https://github.com/gouravkhator/booknutz"
   },
   "bugs": {
-    "url": "https://github.com/gouravkhator/nutzread/issues"
+    "url": "https://github.com/gouravkhator/booknutz/issues"
   },
-  "readme": "https://github.com/gouravkhator/nutzread/blob/master/README.md",
+  "readme": "https://github.com/gouravkhator/booknutz#readme",
   "author": {
     "name": "Gourav Khator"
   },

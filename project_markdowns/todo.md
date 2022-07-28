@@ -1,5 +1,11 @@
 # Todo and Issues Tracker
 
+## Only blocking issue for now
+
+When one tries to login or signup in the deployed version of this app, it tries to login, but the cookies send by the server does not get saved in the browser, as the deployment or hosting platforms restrain us from saving those cookies, due to security concerns.
+
+Only solution is to use a custom paid domain. Refer [this](https://devcenter.heroku.com/articles/cookies-and-herokuapp-com) for more details.
+
 ## Current Issues to Solve
 
 - [ ] Upgrade the dependencies and remove the deprecated methods from the codes.
@@ -7,7 +13,6 @@
 
 ## Todo
 
-- [ ] Upgrade the heroku stack from existing **Heroku-18** stack, as the existing one would be deprecated from `April 30th, 2023`.
 - [ ] Convert all css to sass/scss, so atleast the whole css will be 1 single file, and there won't be 4 different requests for the same.
 - [ ] Replace session-based auth with JWT authentication
 - [ ] Add forgot password feature

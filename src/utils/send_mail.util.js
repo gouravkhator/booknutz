@@ -27,7 +27,7 @@ const sendMail = (target_email, purpose = "verify", msg = "") => {
     //as Math.random gives number between 0 and 1 inclusive of 0 but not 1 so 6-digit will only be there
 
     let mailOptions = {
-      from: `Nutzread ${sender_email}`,
+      from: `Booknutz ${sender_email}`,
       to: target_email,
       subject: "Verification Email",
       html: `<h2>Your OTP is ${otp}.</h2><br> <h3>Enter this otp in the verification page.<h3> <h3>Please don't share with anyone.</h3>`,
@@ -51,7 +51,7 @@ const sendMail = (target_email, purpose = "verify", msg = "") => {
     }
   } else if (purpose === "purchase") {
     let mailOptions = {
-      from: `Nutzread <${sender_email}`,
+      from: `Booknutz <${sender_email}`,
       to: target_email,
       subject: "Purchase Email",
       html: `<h2>${msg}</h2>`,

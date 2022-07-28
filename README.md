@@ -1,8 +1,26 @@
-# Nutzread
+# booknutz
 
 **_Hey booknuts_**, bored of life??
 
-Scroll through some awesome **Ebooks** available to purchase within seconds..
+Dig into this nut, to xplore some awesome **E-books**..
+
+This is **booknutz**, a service for booknuts, keeping those nerdy bibliophiles in mind, whilst creating this awesome service..
+
+## Only blocking issue in this project
+
+I have deployed this project on free domain hosting platform, and I am using secure signed cookies to save the state of login over the requests.
+
+In most of the cloud deployment and hosting platforms, they don't allow us to set cookies from the server end, due to security concerns.
+
+Refer [this linked heroku article](https://devcenter.heroku.com/articles/cookies-and-herokuapp-com) on the issue, and why they restrain from allowing the cookies on the projects, hosted on subdomains of `.herokuapp.com`.
+
+### Solutions
+
+One and Only solution as per my knowledge is to use the paid custom domains, and this problem won't be there for sure.
+
+If you, the reader of this repo, find this project useful to refer for your future/existing commercial webapps, then I would be elated if you could buy me a cup of coffee.
+
+To donate in any way possible, please reach out to me on mail `gouravkhator9@gmail.com`. Only from the donations I receive, will I be able to deploy the projects to paid custom domain too.
 
 ## Prerequisites
 
@@ -34,7 +52,7 @@ Scroll through some awesome **Ebooks** available to purchase within seconds..
 
 ## Test Account Details
 
-- Test Login to this `nutzread` webapp:
+- Test Login to this `booknutz` webapp:
 
   ```
   Username: test_account
@@ -49,34 +67,3 @@ Scroll through some awesome **Ebooks** available to purchase within seconds..
   CVV: <any 3-digit random number>
   Expiry Date: <any valid date in the future>
   ```
-
-## Deployment to Heroku
-
-Deployment to Heroku requires below steps:
-
-1. Make a `Procfile` in the root directory of your project, and add below lines:
-
-   ```
-   web: node app.js
-   ```
-
-   Note: Here, we write `web:` followed by the command to start the expressjs server.
-
-2. Edit the express app file, here it is `app.js` to contain below lines:
-
-   ```js
-   /*
-   We have to keep the environment variable name as PORT only, 
-   as heroku injects `PORT` environment variable automatically..
-   and we don't need to pass PORT to the environment variables of Heroku explicitly.
-   
-   I have to research more if we can keep other environment names also.. I think we should be able to, but would confirm after researching..
-   */
-   const PORT = process.env.PORT || 3000;
-
-   /*
-    Also we have to add hostname, as "0.0.0.0" or else heroku gives error as linked below:
-    Issue mentioned online: https://github.com/keystonejs/keystone-classic/issues/3994
-    */
-   app.listen(PORT, "0.0.0.0", () => console.log(`Server started on ${PORT}`));
-   ```
